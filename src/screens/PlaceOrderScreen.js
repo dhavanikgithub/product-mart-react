@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Row, Col, ListGroup, Image, Card, Alert } from 'react-bootstrap'
+import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
-import { createOrder } from '../actions/orderActions'
 import { USER_DETAILS_RESET } from '../constants/userConstants'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
+import { removeFromCart } from '../actions/cartActions'
 
 const PlaceOrderScreen = ({ history }) => {
 	const dispatch = useDispatch()
@@ -48,8 +48,17 @@ const PlaceOrderScreen = ({ history }) => {
 		// eslint-disable-next-line
 	}, [history, success]) // Dependencies, on change they fire off useEffect
 
+	/**
+	 * Handles the process of placing an order. Removes all items from the cart. After that, it redirects the user to the home page.
+	 *
+	 * @return {void} This function does not return anything.
+	 */
 	const placeOrderHandler = () => {
-		localStorage.removeItem('cartItems')
+		cart.cartItems.map((item) => 
+			dispatch(
+				removeFromCart(item.product)
+			)
+		)
 		alert("Order Successfully booked")
 		history.push('/')
 	}

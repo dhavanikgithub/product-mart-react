@@ -16,7 +16,7 @@ const CartScreen = ({ match, location, history }) => {
 
 	// useSelector is to grab what we want from the state
 	const cart = useSelector((state) => state.cart)
-	const { cartItems } = cart
+	let { cartItems } = cart
 
 	// Add two decimals to price if needed
 	const addDecimals = (num) => {
