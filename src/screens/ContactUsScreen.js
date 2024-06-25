@@ -7,8 +7,45 @@ const ContactUsScreen = () => {
 		email: '',
 		message: '',
 	})
+	const [errors, setErrors] = useState({})
 
 	const { name, email, message } = formData
+
+	const validateName = (name) => {
+		const pattern = /^[a-zA-Z\s'-]{3,50}$/
+		if (!name) {
+			return 'Name is required'
+		} else if (name.length < 3) {
+			return 'Name must be at least 3 characters long'
+		} else if (name.length > 50) {
+			return 'Name must be less than 50 characters long'
+		} else if (!pattern.test(name)) {
+			return 'Name can only contain letters, spaces, hyphens, and apostrophes'
+		}
+		return ''
+	}
+
+	const validateEmail = (email) => {
+		const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+		if (!email) {
+			return 'Email is required'
+		} else if (!pattern.test(email)) {
+			return 'Invalid email format'
+		}
+		return ''
+	}
+
+	const validateMessage = (message) => {
+		const pattern = /^[a-zA-Z0-9\s.,?!'-]{1,500}$/
+		if (!message) {
+			return 'Message is required'
+		} else if (message.length > 500) {
+			return 'Message must be less than 500 characters long'
+		} else if (!pattern.test(message)) {
+			return 'Message contains invalid characters'
+		}
+		return ''
+	}
 
 	const handleChange = (e) => {
 		setFormData({
@@ -19,8 +56,22 @@ const ContactUsScreen = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		// Handle form submission logic here
-		console.log('Form data submitted: ', formData)
+
+		const nameError = validateName(name)
+		const emailError = validateEmail(email)
+		const messageError = validateMessage(message)
+
+		if (nameError || emailError || messageError) {
+			setErrors({
+				name: nameError,
+				email: emailError,
+				message: messageError,
+			})
+		} else {
+			// Handle form submission logic here
+			console.log('Form data submitted: ', formData)
+			setErrors({})
+		}
 	}
 
 	return (
@@ -37,8 +88,14 @@ const ContactUsScreen = () => {
 								name='name'
 								value={name}
 								onChange={handleChange}
-								required
+								isInvalid={!!errors.name}
 							/>
+							<Form.Control.Feedback type='invalid'>
+								{errors.name}
+							</Form.Control.Feedback>
+							<Form.Text className='text-muted'>
+								Name must be 3-50 characters long and can only contain letters, spaces, hyphens, and apostrophes.
+							</Form.Text>
 						</Form.Group>
 
 						<Form.Group controlId='email'>
@@ -49,8 +106,14 @@ const ContactUsScreen = () => {
 								name='email'
 								value={email}
 								onChange={handleChange}
-								required
+								isInvalid={!!errors.email}
 							/>
+							<Form.Control.Feedback type='invalid'>
+								{errors.email}
+							</Form.Control.Feedback>
+							<Form.Text className='text-muted'>
+								Enter a valid email address, e.g., name@example.com.
+							</Form.Text>
 						</Form.Group>
 
 						<Form.Group controlId='message'>
@@ -62,8 +125,14 @@ const ContactUsScreen = () => {
 								name='message'
 								value={message}
 								onChange={handleChange}
-								required
+								isInvalid={!!errors.message}
 							/>
+							<Form.Control.Feedback type='invalid'>
+								{errors.message}
+							</Form.Control.Feedback>
+							<Form.Text className='text-muted'>
+								Message must be less than 500 characters long and can contain letters, numbers, spaces, periods, commas, question marks, exclamation points, hyphens, and apostrophes.
+							</Form.Text>
 						</Form.Group>
 
 						<Button variant='primary' type='submit' className='mt-3'>

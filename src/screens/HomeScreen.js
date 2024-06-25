@@ -9,54 +9,46 @@ import Meta from '../components/Meta'
 import { listProducts } from '../actions/productActions'
 
 const HomeScreen = ({ match }) => {
-	const keyword = match.params.keyword
+    const keyword = match.params.keyword
+    const pageNumber = match.params.pageNumber || 1
+    const dispatch = useDispatch()
 
-	const pageNumber = match.params.pageNumber || 1
+    // useSelector to grab product list state
+    const productList = useSelector((state) => state.productList)
+    const { loading, error, products, page, pages } = productList
 
-	const dispatch = useDispatch()
+    // Fetch products upon component mount
+    useEffect(() => {
+        dispatch(listProducts(keyword, pageNumber))
+    }, [dispatch, keyword, pageNumber])
 
-	// useSelector is to grab what we want from the state
-	const productList = useSelector((state) => state.productList)
-	const { loading, error, products, page, pages } = productList
+    return (
+        <>
+            <Meta />
+            <h1>Products</h1>
 
-	// make request here upon component load
-	useEffect(
-		() => {
-			// Fire off action to get the products
-			dispatch(listProducts(keyword, pageNumber))
-		},
-		[dispatch, keyword, pageNumber] // Dependencies, on change they fire off useEffect
-	)
-	return (
-		<>
-			<Meta />
-			
-			<h1>Products</h1>
-			{/* When loading, display Loading...
-            On error, display error
-            Else display the products */}
-			{loading ? (
-				<Loader />
-			) : error ? (
-				<Message variant='danger'>{error}</Message>
-			) : (
-				<>
-					<Row>
-						{products.map((product) => (
-							<Col key={product._id} sm={12} md='6' lg={4} xl={3}>
-								<Product product={product} />
-							</Col>
-						))}
-					</Row>
-					<Paginate
-						pages={pages}
-						page={page}
-						keyword={keyword ? keyword : ''}
-					/>
-				</>
-			)}
-		</>
-	)
+            {/* Display loading spinner, error message, or products */}
+            {loading ? (
+                <Loader />
+            ) : error ? (
+                <Message variant='danger'>{error}</Message>
+            ) : (
+                <>
+                    {/* Display products in multiple columns */}
+                    <Row>
+                        {products.map((product) => (
+                            <Col key={product._id} xs={12} sm={6} md={4} lg={3}>
+                                <Product product={product} />
+                            </Col>
+                        ))}
+                    </Row>
+
+                    {/* Pagination */}
+                    <Paginate pages={pages} page={page} keyword={keyword ? keyword : ''} />
+                </>
+            )}
+        </>
+    )
 }
 
 export default HomeScreen

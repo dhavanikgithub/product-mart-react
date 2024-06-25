@@ -11,6 +11,7 @@ import {
 	createProductReview,
 } from '../actions/productActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
+import { removeFromCart } from '../actions/cartActions';
 
 const ProductScreen = ({ history, match }) => {
 	const [qty, setQty] = useState(1)
@@ -28,6 +29,10 @@ const ProductScreen = ({ history, match }) => {
 	// Make sure user is logged in
 	const userLogin = useSelector((state) => state.userLogin)
 	const { userInfo } = userLogin
+
+	// For cart
+	const cart = useSelector((state) => state.cart);
+	const { cartItems } = cart;
 
 	// For product review
 	const productReviewCreate = useSelector((state) => state.productReviewCreate)
@@ -71,6 +76,11 @@ const ProductScreen = ({ history, match }) => {
 		)
 	}
 
+	// Remove from cart handler
+	const removeFromCartHandler = () => {
+		dispatch(removeFromCart(product._id));
+	};
+
 	return (
 		<>
 			{/* Back button */}
@@ -103,6 +113,7 @@ const ProductScreen = ({ history, match }) => {
 									<Rating
 										value={product.rating}
 										text={`${product.numReviews} reviews`}
+										color={'#333333'}
 									/>
 								</ListGroup.Item>
 								{/* Product price */}
@@ -138,45 +149,58 @@ const ProductScreen = ({ history, match }) => {
 
 									{/* Quantity of stock */}
 									{product.countInStock > 0 && (
-										<ListGroup.Item>
-											<Row>
-												<Col>Qty</Col>
-												<Col>
-													<Form.Control
-														as='select'
-														value={qty}
-														onChange={(e) => setQty(e.target.value)}
-													>
-														{/* Getting countInStock keys */}
-														{[...Array(product.countInStock).keys()].map(
-															(x) => (
-																<option key={x + 1} value={x + 1}>
-																	{x + 1}
-																</option>
-															)
-														)}
-													</Form.Control>
-												</Col>
-											</Row>
-										</ListGroup.Item>
+										cartItems.some((item) => item.product === product._id) ? (null) : (
+											// Only show if product is in stock
+											<ListGroup.Item>
+												<Row>
+													<Col>Qty</Col>
+													<Col>
+														<Form.Control
+															as='select'
+															value={qty}
+															onChange={(e) => setQty(e.target.value)}
+														>
+															{/* Getting countInStock keys */}
+															{[...Array(product.countInStock).keys()].map(
+																(x) => (
+																	<option key={x + 1} value={x + 1}>
+																		{x + 1}
+																	</option>
+																)
+															)}
+														</Form.Control>
+													</Col>
+												</Row>
+											</ListGroup.Item>
+										)
+
 									)}
 
 									<ListGroup.Item>
-										{product.countInStock > 0 ? (
-											/* Add to cart button */
+										{cartItems.some((item) => item.product === product._id) ? (
+											// Show "Added to Cart" message if product is in cart
+											<Button
+												onClick={removeFromCartHandler}
+												className='btn btn-secondary'
+												type='button'
+												disabled={true}
+											>
+												Added to Cart
+											</Button>
+										) : product.countInStock > 0 ? (
+											// Add to cart button
 											<Button
 												onClick={addToCartHandler}
 												className='btn-block'
 												type='button'
 											>
-												<i className='fas fa-plus'></i>
 												<span className='plus-sign-margin'>
 													<i className='fas fa-shopping-cart'></i>
 												</span>
 												Add To Cart
 											</Button>
 										) : (
-											/* Sold Out button */
+											// Sold Out button
 											<Button
 												className='btn-block'
 												type='button'
@@ -216,8 +240,8 @@ const ProductScreen = ({ history, match }) => {
 										<Message variant='danger'>{errorProductReview}</Message>
 									)}
 									{userInfo ? (
-										<Form className='push-to-right' onSubmit={submitHandler}>
-											<Form.Group controlId='rating'>
+										<Form className='mt-3' onSubmit={submitHandler}>
+											<Form.Group controlId='rating' className='mb-3'>
 												<Form.Label>Rating</Form.Label>
 												<Form.Control
 													as='select'
@@ -233,9 +257,10 @@ const ProductScreen = ({ history, match }) => {
 													<option value='5'>5 - Excellent</option>
 												</Form.Control>
 											</Form.Group>
-											<Form.Group controlId='comment'>
+											<Form.Group controlId='comment' className='mb-3'>
 												<Form.Control
 													as='textarea'
+
 													required
 													row='3'
 													onChange={(e) => setComment(e.target.value)}

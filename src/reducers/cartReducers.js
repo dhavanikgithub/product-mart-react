@@ -4,6 +4,7 @@ import {
 	CART_SAVE_SHIPPING_ADDRESS,
 	CART_SAVE_PAYMENT_METHOD,
 	CART_CLEAR_ITEMS,
+	CART_GET_TOTAL_ITEMS
 } from '../constants/cartConstants'
 
 export const cartReducer = (
@@ -53,6 +54,16 @@ export const cartReducer = (
 			return {
 				...state,
 				cartItems: [],
+			}
+		// New case to calculate total items count
+		case CART_GET_TOTAL_ITEMS:
+			const totalItems = state.cartItems.reduce(
+				(acc, item) => acc + item.qty,
+				0
+			)
+			return {
+				...state,
+				totalItems: totalItems,
 			}
 		// In any other case, just return the state
 		default:
