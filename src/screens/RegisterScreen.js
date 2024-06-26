@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -17,14 +17,18 @@ const RegisterScreen = ({ location, history }) => {
 	const dispatch = useDispatch();
 
 	// useSelector is to grab what we want from the state
+	const userRegister = useSelector((state) => state.userRegister)
+	const { loading, error, userInfo } = userRegister
+
+	// useSelector is to grab what we want from the state
 	const userLogin = useSelector((state) => state.userLogin);
-	const { loading, error, userInfo } = userLogin;
+	
 
 	const redirect = location.search ? location.search.split('=')[1] : '/';
 
 	// make request here upon component load
 	useEffect(() => {
-		if (userInfo) {
+		if (userLogin.userInfo || userInfo) {
 			history.push(redirect);
 		}
 	}, [history, userInfo, redirect]); // Dependencies, on change they fire off useEffect
@@ -87,92 +91,93 @@ const RegisterScreen = ({ location, history }) => {
 
 	return (
 		<FormContainer>
-			<h1 className="mb-4">Sign Up</h1>
+			{/* 
+					On error, display error
+					When loading, display Loading... */}
 			{error && <Message variant='danger'>{error}</Message>}
-			{loading && <Loader />}
-			<Form onSubmit={submitHandler}>
-				<Form.Group className="mb-3" controlId='name'>
-					<Form.Label>Name</Form.Label>
-					<Form.Control
-						type='text'
-						placeholder='Enter name'
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-						isInvalid={!!errors.name}
-						maxLength={50}
-					/>
-					<Form.Control.Feedback type='invalid'>
-						{errors.name}
-					</Form.Control.Feedback>
-					<Form.Text className='text-muted'>
-						Name must be at least 3 characters long and less than 50 characters.
-					</Form.Text>
-				</Form.Group>
-
-				<Form.Group className="mb-3" controlId='email'>
-					<Form.Label>Email Address</Form.Label>
-					<Form.Control
-						type='email'
-						placeholder='Enter email'
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						isInvalid={!!errors.email}
-					/>
-					<Form.Control.Feedback type='invalid'>
-						{errors.email}
-					</Form.Control.Feedback>
-					<Form.Text className='text-muted'>
-						Enter a valid email address, e.g., name@example.com.
-					</Form.Text>
-				</Form.Group>
-
-				<Form.Group className="mb-3" controlId='password'>
-					<Form.Label>Password</Form.Label>
-					<Form.Control
-						type='password'
-						placeholder='Enter password'
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						isInvalid={!!errors.password}
-					/>
-					<Form.Control.Feedback type='invalid'>
-						{errors.password}
-					</Form.Control.Feedback>
-					<Form.Text className='text-muted'>
-						Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character.
-					</Form.Text>
-				</Form.Group>
-
-				<Form.Group className="mb-3" controlId='confirmPassword'>
-					<Form.Label>Confirm Password</Form.Label>
-					<Form.Control
-						type='password'
-						placeholder='Confirm password'
-						value={confirmPassword}
-						onChange={(e) => setConfirmPassword(e.target.value)}
-						isInvalid={!!errors.confirmPassword}
-					/>
-					<Form.Control.Feedback type='invalid'>
-						{errors.confirmPassword}
-					</Form.Control.Feedback>
-					<Form.Text className='text-muted'>
-						Please confirm your password.
-					</Form.Text>
-				</Form.Group>
-
-				<Button type='submit' variant='primary' className="mt-3">
-					Register
-				</Button>
-			</Form>
-
-			<Row className='py-3'>
-				<Col>
-					Have an Account?{' '}
-					<Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
-						Login
-					</Link>
-				</Col>
-			</Row>
+			<Card className="rounded shadow border-0">
+				<h1 className="mb-4 bg-dark text-white rounded-top p-4">Sign Up</h1>
+				{loading && <Loader />}
+				<Form onSubmit={submitHandler} className='p-4'>
+					<Form.Group className="mb-3" controlId='name'>
+						<Form.Label>Name</Form.Label>
+						<Form.Control
+							type='text'
+							placeholder='Enter name'
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+							isInvalid={!!errors.name}
+							maxLength={50}
+						/>
+						<Form.Control.Feedback type='invalid'>
+							{errors.name}
+						</Form.Control.Feedback>
+						<Form.Text className='text-muted'>
+							Name must be at least 3 characters long and less than 50 characters.
+						</Form.Text>
+					</Form.Group>
+					<Form.Group className="mb-3" controlId='email'>
+						<Form.Label>Email Address</Form.Label>
+						<Form.Control
+							type='email'
+							placeholder='Enter email'
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							isInvalid={!!errors.email}
+						/>
+						<Form.Control.Feedback type='invalid'>
+							{errors.email}
+						</Form.Control.Feedback>
+						<Form.Text className='text-muted'>
+							Enter a valid email address, e.g., name@example.com.
+						</Form.Text>
+					</Form.Group>
+					<Form.Group className="mb-3" controlId='password'>
+						<Form.Label>Password</Form.Label>
+						<Form.Control
+							type='password'
+							placeholder='Enter password'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							isInvalid={!!errors.password}
+						/>
+						<Form.Control.Feedback type='invalid'>
+							{errors.password}
+						</Form.Control.Feedback>
+						<Form.Text className='text-muted'>
+							Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character.
+						</Form.Text>
+					</Form.Group>
+					<Form.Group className="mb-3" controlId='confirmPassword'>
+						<Form.Label>Confirm Password</Form.Label>
+						<Form.Control
+							type='password'
+							placeholder='Confirm password'
+							value={confirmPassword}
+							onChange={(e) => setConfirmPassword(e.target.value)}
+							isInvalid={!!errors.confirmPassword}
+						/>
+						<Form.Control.Feedback type='invalid'>
+							{errors.confirmPassword}
+						</Form.Control.Feedback>
+						<Form.Text className='text-muted'>
+							Please confirm your password.
+						</Form.Text>
+					</Form.Group>
+					<Button type='submit' variant='primary' className="mt-3">
+						Register
+					</Button>
+				</Form>
+				<Row className='p-4'>
+					<Col>
+						Have an Account?{' '}
+						<Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+							Login
+						</Link>
+					</Col>
+				</Row>
+			
+		</Card>
 		</FormContainer>
 	);
 };

@@ -2,10 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card, Row, Col, OverlayTrigger , Tooltip } from 'react-bootstrap'
 import Rating from './Rating'
+import '../index.css'
 
 const Product = ({ product }) => {
 	return (
-		<Card className='my-3 rounded'>
+		<Card className='my-3 rounded product-card'>
 			<Row className='align-items-center'>
 				<Col md={4} className=''>
 					<Link to={`/product/${product._id}`} className="text-decoration-none ">

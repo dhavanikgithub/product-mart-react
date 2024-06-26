@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Button, Container, Row, Col } from 'react-bootstrap'
+import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap'
 
 const ContactUsScreen = () => {
 	const [formData, setFormData] = useState({
@@ -78,67 +78,66 @@ const ContactUsScreen = () => {
 		<Container className='py-5'>
 			<Row className='justify-content-md-center'>
 				<Col md={6}>
-					<h2 className='text-center mb-4'>Contact Us</h2>
-					<Form onSubmit={handleSubmit}>
-						<Form.Group controlId='name'>
-							<Form.Label>Name</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='Enter your name'
-								name='name'
-								value={name}
-								onChange={handleChange}
-								isInvalid={!!errors.name}
-							/>
-							<Form.Control.Feedback type='invalid'>
-								{errors.name}
-							</Form.Control.Feedback>
-							<Form.Text className='text-muted'>
-								Name must be 3-50 characters long and can only contain letters, spaces, hyphens, and apostrophes.
-							</Form.Text>
-						</Form.Group>
-
-						<Form.Group controlId='email'>
-							<Form.Label>Email address</Form.Label>
-							<Form.Control
-								type='email'
-								placeholder='Enter your email'
-								name='email'
-								value={email}
-								onChange={handleChange}
-								isInvalid={!!errors.email}
-							/>
-							<Form.Control.Feedback type='invalid'>
-								{errors.email}
-							</Form.Control.Feedback>
-							<Form.Text className='text-muted'>
-								Enter a valid email address, e.g., name@example.com.
-							</Form.Text>
-						</Form.Group>
-
-						<Form.Group controlId='message'>
-							<Form.Label>Message</Form.Label>
-							<Form.Control
-								as='textarea'
-								rows={5}
-								placeholder='Enter your message'
-								name='message'
-								value={message}
-								onChange={handleChange}
-								isInvalid={!!errors.message}
-							/>
-							<Form.Control.Feedback type='invalid'>
-								{errors.message}
-							</Form.Control.Feedback>
-							<Form.Text className='text-muted'>
-								Message must be less than 500 characters long and can contain letters, numbers, spaces, periods, commas, question marks, exclamation points, hyphens, and apostrophes.
-							</Form.Text>
-						</Form.Group>
-
-						<Button variant='primary' type='submit' className='mt-3'>
-							Submit
-						</Button>
-					</Form>
+					<Card className='rounded shadow'>
+						<h5 className='text-center mb-4 text-white bg-dark rounded-top p-2'>Contact Us</h5>
+						<Form onSubmit={handleSubmit} className='p-4'>
+							<Form.Group controlId='name' className='mb-3'>
+								<Form.Label>Name</Form.Label>
+								<Form.Control
+									type='text'
+									placeholder='Enter your name'
+									name='name'
+									value={name}
+									onChange={handleChange}
+									isInvalid={!!errors.name}
+								/>
+								<Form.Control.Feedback type='invalid'>
+									{errors.name}
+								</Form.Control.Feedback>
+								<Form.Text className='text-muted'>
+									Name must be 3-50 characters long and can only contain letters, spaces, hyphens, and apostrophes.
+								</Form.Text>
+							</Form.Group>
+							<Form.Group controlId='email' className='mb-3'>
+								<Form.Label>Email address</Form.Label>
+								<Form.Control
+									type='email'
+									placeholder='Enter your email'
+									name='email'
+									value={email}
+									onChange={handleChange}
+									isInvalid={!!errors.email}
+								/>
+								<Form.Control.Feedback type='invalid'>
+									{errors.email}
+								</Form.Control.Feedback>
+								<Form.Text className='text-muted'>
+									Enter a valid email address, e.g., name@example.com.
+								</Form.Text>
+							</Form.Group>
+							<Form.Group controlId='message'>
+								<Form.Label>Message</Form.Label>
+								<Form.Control
+									as='textarea'
+									rows={5}
+									placeholder='Enter your message'
+									name='message'
+									value={message}
+									onChange={handleChange}
+									isInvalid={!!errors.message}
+								/>
+								<Form.Control.Feedback type='invalid'>
+									{errors.message}
+								</Form.Control.Feedback>
+								<Form.Text className='text-muted'>
+									Message must be less than 500 characters long and can contain letters, numbers, spaces, periods, commas, question marks, exclamation points, hyphens, and apostrophes.
+								</Form.Text>
+							</Form.Group>
+							<Button variant='primary' type='submit' className='mt-3'>
+								Submit
+							</Button>
+						</Form>
+					</Card>
 				</Col>
 			</Row>
 		</Container>

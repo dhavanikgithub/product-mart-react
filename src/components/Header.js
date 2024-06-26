@@ -47,7 +47,8 @@ const Header = () => {
                                 <Nav.Link className='text-white position-relative'>
                                     <i className='fas fa-shopping-cart'></i>
                                     {totalItemsInCart > 0 && (
-                                        <Badge pill bg='info' className='position-absolute top-0 start-100 translate-middle'>
+                                        <Badge pill bg='info' className='position-absolute top-5 start-100 translate-middle'>
+                                            
                                             {totalItemsInCart}
                                             <span className='visually-hidden'>unread messages</span>
                                         </Badge>
@@ -61,7 +62,7 @@ const Header = () => {
                                 </NavDropdown>
                             ) : (
                                 <LinkContainer to='/login'>
-                                    <Nav.Link className='text-white'>
+                                    <Nav.Link className='ms-3 text-dark bg-white p-2 rounded'>
                                         <i className='fas fa-user'></i> Sign In
                                     </Nav.Link>
                                 </LinkContainer>
