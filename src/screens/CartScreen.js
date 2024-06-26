@@ -48,19 +48,20 @@ const CartScreen = ({ match, location, history }) => {
 				) : (
 					<ListGroup variant='flush'>
 						{cartItems.map((item) => (
-							<ListGroup.Item key={item.product}>
+							<ListGroup.Item key={item.product} className='my-3 py-2'>
 								<Row>
-									<Col md={2}>
+									<Col md={1}>
 										<Link to={`/product/${item.product}`}>
-											<Image src={item.image} alt={item.name} fluid rounded />
+											<Image src={item.image} alt={item.name} fluid rounded width={'100%'}/>
 										</Link>
 									</Col>
 									<Col md={3}>
 										<Link to={`/product/${item.product}`}>{item.name}</Link>
+										<Card.Text className='mt-2'>₹ {item.price}</Card.Text>
 									</Col>
-									<Col md={2}>₹ {item.price}</Col>
-									<Col md={2}>
+									<Col md={1}>
 										<Form.Control
+										className='text-center'
 											as='select'
 											value={item.qty}
 											onChange={(e) =>
@@ -80,10 +81,10 @@ const CartScreen = ({ match, location, history }) => {
 									<Col md={2}>
 										<Button
 											type='button'
-											variant='light'
+											variant='dark'
 											onClick={() => removeFromCartHandler(item.product)}
 										>
-											<i className='fas fa-trash'></i>
+											<i className='fas fa-trash text-white'></i>
 										</Button>
 									</Col>
 								</Row>

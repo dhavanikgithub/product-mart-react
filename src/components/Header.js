@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, Container, NavDropdown, Badge } from 'react-bootstrap';
 import { logout } from '../actions/userActions';
+import '../index.css'
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -22,8 +23,8 @@ const Header = () => {
 
     return (
         <header>
-            <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect className='text-uppercase'>
-                <Container>
+            <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect className='text-uppercase px-5 my-font'>
+                <Container fluid>
                     <LinkContainer to='/'>
                         <Navbar.Brand>
                             Product Mart

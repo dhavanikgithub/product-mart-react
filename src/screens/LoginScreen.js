@@ -22,6 +22,7 @@ const LoginScreen = ({ location, history }) => {
 	// make request here upon component load
 	useEffect(() => {
 		if (userInfo) {
+			
 			history.push(redirect);
 		}
 	}, [history, userInfo, redirect]); // Dependencies, on change they fire off useEffect

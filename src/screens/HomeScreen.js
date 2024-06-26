@@ -44,7 +44,7 @@ const HomeScreen = ({ match }) => {
                     </Row>
 
                     {/* Pagination */}
-                    <Paginate pages={pages} page={page} keyword={keyword ? keyword : ''} />
+                    <Paginate  pages={pages} page={page} keyword={keyword ? keyword : ''} />
                 </>
             )}
         </>

@@ -14,13 +14,14 @@ import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import OrderScreen from './screens/OrderScreen'
 import ContactUsScreen from './screens/ContactUsScreen'
+import './index.css'
 
 const App = () => {
 	return (
 		<Router>
 			<Header />
-			<main className='py-3'>
-				<Container>
+			<main className='px-5 py-3 my-font'>
+				<Container fluid>
 					{/* LoginScreen */}
 					<Route path='/login' component={LoginScreen} />
 					{/* RegisterScreen */}

@@ -27,3 +27,43 @@ a {
 .push-to-right {
 	margin-left: 0.6rem;
 }
+.my-font {
+	font-family: "Nunito", sans-serif;
+}
+.custom-pagination .page-item.active .page-link {
+	background-color: #333333; /* Dark color */
+	color: white; /* White text */
+	border-color: #333333; /* Dark border */
+}
+.page-item .page-link {
+	color: #333333; /* White text */
+}
+
+.btn-primary {
+	background-color: #333333; /* Dark color */
+	color: white; /* White text */
+	border-color: #333333; /* Dark border */
+}
+
+.btn-primary:hover {
+	background-color: white; /* Dark color */
+	color: #333333; /* White text */
+	border-color: #333333; /* Dark border */
+}
+.btn-primary:disabled {
+	background-color: #333333; /* Dark color */
+	color: white; /* White text */
+	border-color: #333333; /* Dark border */
+	opacity: 0.5;
+}
+.btn-light {
+	background-color: white; /* Dark color */
+	color: #333333; /* White text */
+	border-color: #333333; /* Dark border */
+}
+
+.btn-light:hover {
+	background-color: #333333; /* Dark color */
+	color: white; /* White text */
+	border-color: #333333; /* Dark border */
+}
