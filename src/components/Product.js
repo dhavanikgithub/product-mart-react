@@ -22,7 +22,7 @@ const Product = ({ product }) => {
 							placement="top"
 							overlay={<Tooltip id={`tooltip-${product.name}`}>{product.name}</Tooltip>}
 							>
-								<Card.Title as='div' className='text-truncate' style={{ maxHeight: '2.5rem' }}>
+								<Card.Title as='div'  className='text-truncate' style={{ maxHeight: '2.5rem' }}>
 									<strong>{product.name}</strong>
 								</Card.Title>
 							</OverlayTrigger>

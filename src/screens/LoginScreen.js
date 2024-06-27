@@ -36,12 +36,11 @@ const LoginScreen = ({ location, history }) => {
 
 	return (
 		<FormContainer>
-			{/* 
-				On error, display error
-				When loading, display Loading... */}
+			{/* On error, display error */}
 			{error && <Message variant="danger">{error}</Message>}
 			<Card className="rounded shadow border-0">
 				<h1 className="mb-4 bg-dark text-white rounded-top p-4">Sign In</h1>
+				{/* When loading, display Loading... */}
 				{loading && <Loader />}
 				<Form onSubmit={submitHandler} className='p-4'>
 					{/* Email */}

@@ -1,115 +1,146 @@
+body,
+canvas {
+	margin: 0;
+	padding: 0;
+	display: block;
+	touch-action: none;
+}
+
 main {
 	min-height: 80vh;
 }
+
+
+a {
+	color: #000;
+}
+
+.text-normal-case {
+	text-transform: none !important;
+}
+
+.my-font {
+	font-family: "Nunito", sans-serif;
+}
+
+.plus-sign-margin {
+	margin: 0.4rem;
+}
+
+.push-to-right {
+	margin-left: 0.6rem;
+}
+
+/* Headings */
 h1 {
 	text-transform: uppercase;
 	font-size: 1.8rem;
 	padding: 1rem 0;
 }
+
 h2 {
 	text-transform: uppercase;
 	font-size: 1.4rem;
 	padding: 0.5rem;
 }
+
 h3 {
 	padding: 1rem 0;
 }
 
+/* Rating */
 .rating span {
 	margin: 0.1rem;
 }
-a {
-	color: #000;
-}
-.plus-sign-margin {
-	margin: 0.4rem;
-}
-.push-to-right {
-	margin-left: 0.6rem;
-}
-.my-font {
-	font-family: "Nunito", sans-serif;
-}
-.custom-pagination .page-item.active .page-link {
-	background-color: #333333; /* Dark color */
-	color: white; /* White text */
-	border-color: #333333; /* Dark border */
-}
 
-.custom-pagination:hover{
-	border-color: #333333; /* Dark border */
-}
-.pagination{
-	--bs-pagination-hover-border-color: #333333;
-	--bs-pagination-hover-color: #333333;
-}
-.page-link{
-	
-	color: #333333;
-}
 
-.btn-primary {
-	background-color: #333333; /* Dark color */
-	color: white; /* White text */
-	border-color: #333333; /* Dark border */
-	--bs-btn-active-color: #333333;
-	--bs-btn-active-bg: #fff;
-	--bs-btn-active-border-color: #fff;
-}
 
-.btn-primary:hover {
-	background-color: white; /* Dark color */
-	color: #333333; /* White text */
-	border-color: #333333; /* Dark border */
-}
-.btn-primary:disabled {
-	background-color: #333333; /* Dark color */
-	color: white; /* White text */
-	border-color: #333333; /* Dark border */
-	opacity: 0.5;
-}
-.btn-light {
-	background-color: white; /* Dark color */
-	color: #333333; /* White text */
-	border-color: #333333; /* Dark border */
-}
+/* Form Controls */
 
-.btn-light:hover {
-	background-color: #333333; /* Dark color */
-	color: white; /* White text */
-	border-color: #333333; /* Dark border */
-}
-
-.form-control:focus-visible {
-	border-color: #333333; /* Dark border */
-}
-
-.form-control:focus {
-    color: var(--bs-body-color);
-    background-color: var(--bs-body-bg);
-    border-color: #333333;
-    outline: 0;
-    box-shadow: 0 0 0 .25rem rgba(103, 108, 117, 0.25);
-}
 
 /* Change the background color of autofilled inputs */
 input:-webkit-autofill,
 textarea:-webkit-autofill,
 select:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px #f2f2f2 inset !important;
-  box-shadow: 0 0 0px 1000px #f2f2f2 inset !important;
-  background-clip: content-box !important;
+	-webkit-box-shadow: 0 0 0px 1000px #f2f2f2 inset !important;
+	box-shadow: 0 0 0px 1000px #f2f2f2 inset !important;
+	background-clip: content-box !important;
 }
 
-.dropdown-menu{
+/* Pagination */
+.pagination {
+	--bs-pagination-hover-border-color: #333333;
+	--bs-pagination-hover-color: #333333;
+}
+
+.page-link {
+	color: #333333;
+}
+
+.custom-pagination .page-item.active .page-link {
+	background-color: #333333;
+	color: white;
+	border-color: #333333;
+}
+
+.custom-pagination .page-item .page-link {
+	background-color: white;
+	color: #333333;
+	border-color: #333333;
+}
+
+
+/* Dropdown Menu */
+.dropdown-menu {
 	--bs-dropdown-link-active-bg: #333333;
 }
-.alert-info	{
+
+/* Alerts */
+.alert-info {
 	background-color: #f2f2f2;
 	border-color: #333333;
 	color: #333333;
 }
 
-.product-card:hover{
+/* Product Card */
+.product-card:hover {
 	border-color: #333333;
+}
+
+.effect {
+	width: 100%;
+	background-size: contain;
+
+
+	h1 {
+
+		font-weight: 900;
+		font-size: 3vw;
+		text-align: left;
+		margin: 0;
+		color: #222;
+		background: url(https://i.imgur.com/jGIGWOA.jpg) repeat fixed;
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+		fill-opacity: 0;
+		animation: bp 8s infinite linear;
+
+	}
+
+	.text {
+		text-align: center;
+		margin: 0;
+		font-size: 1.5vw;
+	}
+}
+
+@keyframes bp {
+	100% {
+		background-position: 0% 552px;
+	}
+
+	0% {
+		background-position: 0% 0px;
+	}
 }

@@ -61,7 +61,7 @@ const ShippingScreen = ({ history }) => {
 			{message && <Message variant='danger'>{message}</Message>}
 			<Form onSubmit={submitHandler}>
 				{/* Address */}
-				<Form.Group controlId='address'>
+				<Form.Group controlId='address' className='mb-3'> 
 					<Form.Label>Address</Form.Label>
 					<Form.Control
 						type='text'
@@ -74,7 +74,7 @@ const ShippingScreen = ({ history }) => {
 					</Form.Text>
 				</Form.Group>
 				{/* City */}
-				<Form.Group controlId='city'>
+				<Form.Group controlId='city' className='mb-3'>
 					<Form.Label>City</Form.Label>
 					<Form.Control
 						type='text'
@@ -87,7 +87,7 @@ const ShippingScreen = ({ history }) => {
 					</Form.Text>
 				</Form.Group>
 				{/* Postal Code */}
-				<Form.Group controlId='postalCode'>
+				<Form.Group controlId='postalCode' className='mb-3'>
 					<Form.Label>Postal Code</Form.Label>
 					<Form.Control
 						type='text'
@@ -100,7 +100,7 @@ const ShippingScreen = ({ history }) => {
 					</Form.Text>
 				</Form.Group>
 				{/* Country */}
-				<Form.Group controlId='country'>
+				<Form.Group controlId='country' className='mb-3'>
 					<Form.Label>Country</Form.Label>
 					<Form.Control
 						type='text'

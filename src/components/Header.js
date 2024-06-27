@@ -30,16 +30,16 @@ const Header = () => {
                             Product Mart
                         </Navbar.Brand>
                     </LinkContainer>
-                    <Navbar.Toggle aria-controls='basic-navbar-nav' />
+                    <Navbar.Toggle aria-controls='basic-navbar-nav ' />
                     <Navbar.Collapse id='basic-navbar-nav'>
                         <Nav className='ms-auto'>
                             <LinkContainer to='/'>
-                                <Nav.Link className='text-white'>
+                                <Nav.Link className='text-white text-normal-case'>
                                     Home
                                 </Nav.Link>
                             </LinkContainer>
                             <LinkContainer to='/contact'>
-                                <Nav.Link className='text-white'>
+                                <Nav.Link className='text-white text-normal-case'>
                                     Contact
                                 </Nav.Link>
                             </LinkContainer>
@@ -57,12 +57,12 @@ const Header = () => {
                             </LinkContainer>
                             
                             {userInfo ? (
-                                <NavDropdown title={userInfo.name} id='username'>
+                                <NavDropdown title={userInfo.name} id='username' className='text-normal-case'>
                                     <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                                 </NavDropdown>
                             ) : (
                                 <LinkContainer to='/login'>
-                                    <Nav.Link className='ms-3 text-dark bg-white p-2 rounded'>
+                                    <Nav.Link className='ms-3'>
                                         <i className='fas fa-user'></i> Sign In
                                     </Nav.Link>
                                 </LinkContainer>

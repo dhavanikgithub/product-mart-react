@@ -31,11 +31,11 @@ const RegisterScreen = ({ location, history }) => {
 		if (userLogin.userInfo || userInfo) {
 			history.push(redirect);
 		}
-	}, [history, userInfo, redirect]); // Dependencies, on change they fire off useEffect
+	}, [history, userInfo, redirect, userLogin]); // Dependencies, on change they fire off useEffect
 	
 
 	const validateEmail = (email) => {
-		// Basic email validation pattern
+		// Email validation pattern
 		const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 		if (!email) {
 			return 'Email is required';
@@ -91,12 +91,11 @@ const RegisterScreen = ({ location, history }) => {
 
 	return (
 		<FormContainer>
-			{/* 
-					On error, display error
-					When loading, display Loading... */}
+			{/* On error, display error */}
 			{error && <Message variant='danger'>{error}</Message>}
 			<Card className="rounded shadow border-0">
 				<h1 className="mb-4 bg-dark text-white rounded-top p-4">Sign Up</h1>
+				{/* When loading, display Loading... */}
 				{loading && <Loader />}
 				<Form onSubmit={submitHandler} className='p-4'>
 					<Form.Group className="mb-3" controlId='name'>

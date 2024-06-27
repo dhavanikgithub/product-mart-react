@@ -8,7 +8,7 @@ const Footer = () => {
             <Container fluid>
                 <Row>
                     <Col className='text-center py-3'>
-                        <h5>Product Mart</h5>
+                        <h5 className="text-white">Product Mart</h5>
                         <Nav className="justify-content-center">
                             <Nav.Item>
                                 <Nav.Link href="/" className="text-white">Home</Nav.Link>

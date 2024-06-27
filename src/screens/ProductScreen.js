@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -11,6 +11,7 @@ import {
 } from '../actions/productActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 import { addToCart, removeFromCart } from '../actions/cartActions';
+import ProductQuantity from '../components/ProductQuantity';
 
 const ProductScreen = ({ history, match }) => {
 	const [qty, setQty] = useState(1)
@@ -21,11 +22,12 @@ const ProductScreen = ({ history, match }) => {
 	const productDetails = useSelector((state) => state.productDetails)
 	const { loading, error, product } = productDetails
 
-
+	
 	// For cart
 	const cart = useSelector((state) => state.cart);
 	const { cartItems } = cart;
 
+	
 	// For product review
 	const productReviewCreate = useSelector((state) => state.productReviewCreate)
 	const {
@@ -77,7 +79,7 @@ const ProductScreen = ({ history, match }) => {
 					<Row>
 						{/* Product image */}
 						<Col md='2'>
-							<Image src={product.image} alt={product.name} fluid width={'100%'}/>
+							<Image src={product.image} alt={product.name} fluid width={'100%'} />
 						</Col>
 						<Col md='1'>
 						</Col>
@@ -126,30 +128,35 @@ const ProductScreen = ({ history, match }) => {
 									{/* Quantity of stock */}
 									{product.countInStock > 0 && (
 										cartItems.some((item) => item.product === product._id) ? (null) : (
+											<ProductQuantity
+												product={product}
+												cartItems={cartItems}
+												qty={qty}
+												setQty={setQty}
+											/>
 											// Only show if product is in stock
-											<ListGroup.Item>
-												<Row>
-													<Col>Qty</Col>
-													<Col>
-														<Form.Control
-															as='select'
-															value={qty}
-															onChange={(e) => setQty(e.target.value)}
-														>
-															{/* Getting countInStock keys */}
-															{[...Array(product.countInStock).keys()].map(
-																(x) => (
-																	<option key={x + 1} value={x + 1}>
-																		{x + 1}
-																	</option>
-																)
-															)}
-														</Form.Control>
-													</Col>
-												</Row>
-											</ListGroup.Item>
+											// <ListGroup.Item>
+											// 	<Row>
+											// 		<Col>Qty</Col>
+											// 		<Col>
+											// 			<Form.Control
+											// 				as='select'
+											// 				value={qty}
+											// 				onChange={(e) => setQty(e.target.value)}
+											// 			>
+											// 				{/* Getting countInStock keys */}
+											// 				{[...Array(product.countInStock).keys()].map(
+											// 					(x) => (
+											// 						<option key={x + 1} value={x + 1}>
+											// 							{x + 1}
+											// 						</option>
+											// 					)
+											// 				)}
+											// 			</Form.Control>
+											// 		</Col>
+											// 	</Row>
+											// </ListGroup.Item>
 										)
-
 									)}
 
 									<ListGroup.Item >
@@ -190,7 +197,7 @@ const ProductScreen = ({ history, match }) => {
 							</Card>
 						</Col>
 					</Row>
-					
+
 				</>
 			)}
 		</>

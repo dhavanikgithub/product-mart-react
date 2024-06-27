@@ -22,8 +22,8 @@ const PlaceOrderScreen = ({ history }) => {
 	cart.itemsPrice = addDecimals(
 		cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
 	)
-	// Shipping price - over R1000 = R0
-	// Else R150
+	// Shipping price - over ₹ 1000 = ₹0
+	// Else ₹150
 	cart.shippingPrice = addDecimals(cart.itemsPrice > 1000 ? 0 : 150)
 	// Tax price
 	cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)))
@@ -111,7 +111,7 @@ const PlaceOrderScreen = ({ history }) => {
 													</Link>
 												</Col>
 												<Col md={4}>
-													{item.qty} x R{item.price} = R{item.qty * item.price}
+													{item.qty} x ₹ {item.price} = ₹ {item.qty * item.price}
 												</Col>
 											</Row>
 										</ListGroup.Item>

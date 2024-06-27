@@ -1,16 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
+import { Row, Col, ListGroup, Image, Button, Card } from 'react-bootstrap'
 import Message from '../components/Message'
-import { addToCart, removeFromCart } from '../actions/cartActions'
+import { removeFromCart, addToCart } from '../actions/cartActions'
 
-const CartScreen = ({ match, location, history }) => {
-	// Get product id
-	const productId = match.params.id
-
-	// Get the quantity ?qty=x
-	const qty = location.search ? Number(location.search.split('=')[1]) : 1
+const CartScreen = ({ history }) => {
 
 	const dispatch = useDispatch()
 
@@ -18,18 +13,11 @@ const CartScreen = ({ match, location, history }) => {
 	const cart = useSelector((state) => state.cart)
 	let { cartItems } = cart
 
+
 	// Add two decimals to price if needed
 	const addDecimals = (num) => {
 		return (Math.round(num * 100) / 100).toFixed(2)
 	}
-
-	// make request here upon component load
-	useEffect(() => {
-		// Fire off action to add item and quantity to cart
-		if (productId) {
-			dispatch(addToCart(productId, qty))
-		}
-	}, [dispatch, productId, qty]) // Dependencies, on change they fire off useEffect
 
 	const removeFromCartHandler = (id) => {
 		dispatch(removeFromCart(id))
@@ -37,6 +25,19 @@ const CartScreen = ({ match, location, history }) => {
 	const checkoutHandler = () => {
 		history.push('/login?redirect=shipping')
 	}
+
+	const incrementQty = (item) => {
+		if (item.qty < item.countInStock) {
+			dispatch(addToCart(item.product, item.qty + 1))
+		}
+	}
+
+	const decrementQty = (item) => {
+		if (item.qty > 1) {
+			dispatch(addToCart(item.product, item.qty - 1))
+		}
+	}
+
 	return (
 		<Row>
 			<Col md={8}>
@@ -50,35 +51,36 @@ const CartScreen = ({ match, location, history }) => {
 						{cartItems.map((item) => (
 							<ListGroup.Item key={item.product} className='my-3 py-2'>
 								<Row>
-									<Col md={1}>
-										<Link to={`/product/${item.product}`}>
-											<Image src={item.image} alt={item.name} fluid rounded width={'100%'}/>
+									<Col className='col-md-2 col-lg-2 col-sm-1 col-1'>
+										<Link to={`/product/${item.product._id}`}>
+											<Image src={item.image} alt={item.name} fluid rounded width={'100%'} />
 										</Link>
 									</Col>
-									<Col md={3}>
-										<Link to={`/product/${item.product}`}>{item.name}</Link>
+									<Col className='col-md-3 col-lg-4'>
+										<Link to={`/product/${item.product._id}`}>{item.name}</Link>
 										<Card.Text className='mt-2'>₹ {item.price}</Card.Text>
 									</Col>
-									<Col md={1}>
-										<Form.Control
-										className='text-center'
-											as='select'
-											value={item.qty}
-											onChange={(e) =>
-												dispatch(
-													addToCart(item.product, Number(e.target.value))
-												)
-											}
+									<Col className='col-md-3 col-lg-4 my-sm-2 my-md-0 my-lg-0 my-2 col'>
+										<Button
+											className='p-2'
+											variant="outline-primary"
+											onClick={() => decrementQty(item)}
+											disabled={item.qty <= 1}
 										>
-											{/* Getting countInStock keys */}
-											{[...Array(item.countInStock).keys()].map((x) => (
-												<option key={x + 1} value={x + 1}>
-													{x + 1}
-												</option>
-											))}
-										</Form.Control>
+											<i className="fas fa-minus"></i>
+										</Button>
+										<span className="mx-2">{item.qty}</span>
+										<Button
+											className='p-2'
+											variant="outline-primary"
+											onClick={() => incrementQty(item)}
+											disabled={item.qty >= item.countInStock}
+										>
+											<i className="fas fa-plus"></i>
+										</Button>
+
 									</Col>
-									<Col md={2}>
+									<Col className='my-sm-2 my-md-0 my-lg-0 my-2 col-md-2'>
 										<Button
 											type='button'
 											variant='dark'
@@ -102,7 +104,7 @@ const CartScreen = ({ match, location, history }) => {
 								items
 							</h2>
 							<span className='push-to-right'>
-							₹ {addDecimals(
+								₹ {addDecimals(
 									cartItems
 										.reduce((acc, item) => acc + item.qty * item.price, 0)
 										.toFixed(2)

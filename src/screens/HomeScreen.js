@@ -25,7 +25,9 @@ const HomeScreen = ({ match }) => {
     return (
         <>
             <Meta />
-            <h1>Products</h1>
+            <div className="effect">
+            <h1 className='heading'>Products</h1>
+            </div>
 
             {/* Display loading spinner, error message, or products */}
             {loading ? (
