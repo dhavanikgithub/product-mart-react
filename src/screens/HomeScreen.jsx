@@ -25,7 +25,7 @@ const HomeScreen = ({ match }) => {
     return (
         <>
             <Meta />
-            <div className="effect">
+            <div className="effect focus-in-expand-fwd">
             <h1 className='heading'>Products</h1>
             </div>
 

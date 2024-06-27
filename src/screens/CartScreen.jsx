@@ -48,50 +48,53 @@ const CartScreen = ({ history }) => {
 					</Message>
 				) : (
 					<ListGroup variant='flush'>
-						{cartItems.map((item) => (
-							<ListGroup.Item key={item.product} className='my-3 py-2'>
-								<Row>
-									<Col className='col-md-2 col-lg-2 col-sm-1 col-1'>
-										<Link to={`/product/${item.product._id}`}>
-											<Image src={item.image} alt={item.name} fluid rounded width={'100%'} />
-										</Link>
-									</Col>
-									<Col className='col-md-3 col-lg-4'>
-										<Link to={`/product/${item.product._id}`}>{item.name}</Link>
-										<Card.Text className='mt-2'>₹ {item.price}</Card.Text>
-									</Col>
-									<Col className='col-md-3 col-lg-4 my-sm-2 my-md-0 my-lg-0 my-2 col'>
-										<Button
-											className='p-2'
-											variant="outline-primary"
-											onClick={() => decrementQty(item)}
-											disabled={item.qty <= 1}
-										>
-											<i className="fas fa-minus"></i>
-										</Button>
-										<span className="mx-2">{item.qty}</span>
-										<Button
-											className='p-2'
-											variant="outline-primary"
-											onClick={() => incrementQty(item)}
-											disabled={item.qty >= item.countInStock}
-										>
-											<i className="fas fa-plus"></i>
-										</Button>
+						{cartItems.map((item) => {
+							return (
 
-									</Col>
-									<Col className='my-sm-2 my-md-0 my-lg-0 my-2 col-md-2'>
-										<Button
-											type='button'
-											variant='dark'
-											onClick={() => removeFromCartHandler(item.product)}
-										>
-											<i className='fas fa-trash text-white'></i>
-										</Button>
-									</Col>
-								</Row>
-							</ListGroup.Item>
-						))}
+								<ListGroup.Item key={item.product} className={`my-3 py-2 scale-up-center`}>
+									<Row>
+										<Col className='col-md-2 col-lg-2 col-sm-1 col-1'>
+											<Link to={`/product/${item.product._id}`}>
+												<Image src={item.image} alt={item.name} fluid rounded width={'100%'} />
+											</Link>
+										</Col>
+										<Col className='col-md-3 col-lg-4'>
+											<Link to={`/product/${item.product._id}`}>{item.name}</Link>
+											<Card.Text className='mt-2'>₹ {item.price}</Card.Text>
+										</Col>
+										<Col className='col-md-3 col-lg-4 my-sm-2 my-md-0 my-lg-0 my-2 col'>
+											<Button
+												className='p-2'
+												variant="outline-primary"
+												onClick={() => decrementQty(item)}
+												disabled={item.qty <= 1}
+											>
+												<i className="fas fa-minus"></i>
+											</Button>
+											<span className="mx-2">{item.qty}</span>
+											<Button
+												className='p-2'
+												variant="outline-primary"
+												onClick={() => incrementQty(item)}
+												disabled={item.qty >= item.countInStock}
+											>
+												<i className="fas fa-plus"></i>
+											</Button>
+
+										</Col>
+										<Col className='my-sm-2 my-md-0 my-lg-0 my-2 col-md-2'>
+											<Button
+												type='button'
+												variant='dark'
+												onClick={() => removeFromCartHandler(item.product)}
+											>
+												<i className='fas fa-trash text-white'></i>
+											</Button>
+										</Col>
+									</Row>
+								</ListGroup.Item>
+							)
+						})}
 					</ListGroup>
 				)}
 			</Col>

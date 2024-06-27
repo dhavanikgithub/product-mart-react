@@ -6,10 +6,10 @@ import '../index.css'
 
 const Product = ({ product }) => {
 	return (
-		<Card className='my-3 rounded product-card'>
+		<Card className='my-3 rounded product-card scale-up-center'>
 			<Row className='align-items-center'>
 				<Col md={4} className=''>
-					<Link to={`/product/${product._id}`} className="text-decoration-none ">
+					<Link to={`/product/${product._id}`} className="text-decoration-none scale-up-ver-center">
 						{/* Product image */}
 						<Card.Img src={product.image} variant='top' className='img-fluid p-3' style={{ height: '150px', objectFit: 'contain' }} />
 					</Link>
@@ -22,7 +22,7 @@ const Product = ({ product }) => {
 							placement="top"
 							overlay={<Tooltip id={`tooltip-${product.name}`}>{product.name}</Tooltip>}
 							>
-								<Card.Title as='div'  className='text-truncate' style={{ maxHeight: '2.5rem' }}>
+								<Card.Title as='div'  className='text-truncate ' style={{ maxHeight: '2.5rem' }}>
 									<strong>{product.name}</strong>
 								</Card.Title>
 							</OverlayTrigger>

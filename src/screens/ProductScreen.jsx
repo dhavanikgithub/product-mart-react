@@ -26,7 +26,7 @@ const ProductScreen = ({ history, match }) => {
 	// For cart
 	const cart = useSelector((state) => state.cart);
 	const { cartItems } = cart;
-
+	
 	
 	// For product review
 	const productReviewCreate = useSelector((state) => state.productReviewCreate)
@@ -73,13 +73,13 @@ const ProductScreen = ({ history, match }) => {
 				<Loader />
 			) : error ? (
 				<Message variant='danger'>{error}</Message>
-			) : (
+			) : product && (
 				<>
 					<Meta title={product.name} />
-					<Row>
+					<Row className='justify-content-md-center'>
 						{/* Product image */}
 						<Col md='2'>
-							<Image src={product.image} alt={product.name} fluid width={'100%'} />
+							<Image className='scale-up-center' src={product.image} alt={product.name} fluid width={'100%'} />
 						</Col>
 						<Col md='1'>
 						</Col>
@@ -90,7 +90,7 @@ const ProductScreen = ({ history, match }) => {
 									<h3>{product.name}</h3>
 								</ListGroup.Item>
 								{/* Product rating */}
-								<ListGroup.Item>
+								<ListGroup.Item className='tracking-in-expand '>
 									<Rating
 										value={product.rating}
 										text={`${product.numReviews} reviews`}
@@ -104,7 +104,7 @@ const ProductScreen = ({ history, match }) => {
 									Description: {product.description}
 								</ListGroup.Item>
 							</ListGroup>
-							<Card className='mt-4 bg-dark'>
+							<Card className='mt-4 bg-dark scale-up-center'>
 								<ListGroup variant='flush' className='bg-dark'>
 									<ListGroup.Item className='bg-dark text-white'>
 										{/* Product price */}
