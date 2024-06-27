@@ -22,12 +22,20 @@ const LoginScreen = ({ location, history }) => {
 
 	// make request here upon component load
 	useEffect(() => {
+		// Scrolls the window back to the top
+		window.scrollTo(0, 0);
 		if (userInfo) {
 
 			history.push(redirect);
 		}
 	}, [history, userInfo, redirect]); // Dependencies, on change they fire off useEffect
 
+	/**
+	 * Handles the form submission for logging in.
+	 *
+	 * @param {Event} e - The event object representing the form submission.
+	 * @return {void}
+	 */
 	const submitHandler = (e) => {
 		e.preventDefault();
 		// Dispatch login
@@ -38,7 +46,7 @@ const LoginScreen = ({ location, history }) => {
 		<FormContainer>
 			{/* On error, display error */}
 			{error && <Message variant="danger">{error}</Message>}
-			<Card className="rounded shadow border-0">
+			<Card className="rounded shadow border-0 scale-up-center">
 				<h1 className="mb-4 bg-dark text-white rounded-top p-4">Sign In</h1>
 				{/* When loading, display Loading... */}
 				{loading && <Loader />}

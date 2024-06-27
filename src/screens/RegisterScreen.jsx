@@ -7,6 +7,8 @@ import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { register } from '../actions/userActions';
 
+
+
 const RegisterScreen = ({ location, history }) => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
@@ -22,7 +24,7 @@ const RegisterScreen = ({ location, history }) => {
 
 	// useSelector is to grab what we want from the state
 	const userLogin = useSelector((state) => state.userLogin);
-	
+
 
 	const redirect = location.search ? location.search.split('=')[1] : '/';
 
@@ -32,8 +34,14 @@ const RegisterScreen = ({ location, history }) => {
 			history.push(redirect);
 		}
 	}, [history, userInfo, redirect, userLogin]); // Dependencies, on change they fire off useEffect
-	
 
+
+	/**
+	 * A function to validate an email address.
+	 *
+	 * @param {string} email - The email address to be validated.
+	 * @return {string} An error message if the email is invalid, otherwise an empty string.
+	 */
 	const validateEmail = (email) => {
 		// Email validation pattern
 		const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -45,6 +53,13 @@ const RegisterScreen = ({ location, history }) => {
 		return '';
 	};
 
+
+	/**
+	 * Validates a password based on certain criteria.
+	 *
+	 * @param {string} password - The password to be validated.
+	 * @return {string} An empty string if the password is valid, or an error message if it is not.
+	 */
 	const validatePassword = (password) => {
 		// Password must be at least 8 characters, contain an uppercase letter, a lowercase letter, a number, and a special character
 		const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -56,6 +71,12 @@ const RegisterScreen = ({ location, history }) => {
 		return '';
 	};
 
+	/**
+	 * Validates the given name.
+	 *
+	 * @param {string} name - The name to validate.
+	 * @return {string} An empty string if the name is valid, or an error message if it is not.
+	 */
 	const validateName = (name) => {
 		if (!name) {
 			return 'Name is required';
@@ -67,6 +88,18 @@ const RegisterScreen = ({ location, history }) => {
 		return '';
 	};
 
+	useEffect(() => {
+		// Scrolls the window
+		window.scrollTo(0, 90);
+	}, []);
+
+
+	/**
+	 * Handles the form submission for registering a new user.
+	 *
+	 * @param {Event} e - The event object representing the form submission.
+	 * @return {void}
+	 */
 	const submitHandler = (e) => {
 		e.preventDefault();
 
@@ -93,7 +126,7 @@ const RegisterScreen = ({ location, history }) => {
 		<FormContainer>
 			{/* On error, display error */}
 			{error && <Message variant='danger'>{error}</Message>}
-			<Card className="rounded shadow border-0">
+			<Card className="rounded shadow border-0 scale-up-center">
 				<h1 className="mb-4 bg-dark text-white rounded-top p-4">Sign Up</h1>
 				{/* When loading, display Loading... */}
 				{loading && <Loader />}
@@ -175,8 +208,8 @@ const RegisterScreen = ({ location, history }) => {
 						</Link>
 					</Col>
 				</Row>
-			
-		</Card>
+
+			</Card>
 		</FormContainer>
 	);
 };

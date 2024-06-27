@@ -1,15 +1,6 @@
-body,
-canvas {
-	margin: 0;
-	padding: 0;
-	display: block;
-	touch-action: none;
-}
-
 main {
 	min-height: 80vh;
 }
-
 
 a {
 	color: #000;
@@ -33,7 +24,6 @@ a {
 
 
 
-
 /* Headings */
 h1 {
 	text-transform: uppercase;
@@ -51,6 +41,7 @@ h3 {
 	padding: 1rem 0;
 }
 
+
 /* Rating */
 .rating span {
 	margin: 0.1rem;
@@ -59,7 +50,6 @@ h3 {
 
 
 /* Form Controls */
-
 
 /* Change the background color of autofilled inputs */
 input:-webkit-autofill,
@@ -110,6 +100,9 @@ select:-webkit-autofill {
 	border-color: #333333;
 }
 
+
+
+/* Banner */
 .effect {
 	width: 100%;
 	background-size: contain;
@@ -138,6 +131,19 @@ select:-webkit-autofill {
 	}
 }
 
+/* Key Frames */
+@keyframes bp {
+	100% {
+		background-position: 0% 552px;
+	}
+
+	0% {
+		background-position: 0% 0px;
+	}
+}
+
+
+
 /* Animation Classes */
 
 /* Scale up center */
@@ -146,6 +152,7 @@ select:-webkit-autofill {
 	animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
+/* Key Frames : Scale up center */
 @-webkit-keyframes scale-up-center {
 	0% {
 		-webkit-transform: scale(0.5);
@@ -170,12 +177,14 @@ select:-webkit-autofill {
 	}
 }
 
+
 /* Scale up vertical center */
 .scale-up-ver-center {
 	-webkit-animation: scale-up-ver-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 	animation: scale-up-ver-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
+/* Key Frames : Scale up vertical center */
 @-webkit-keyframes scale-up-ver-center {
 	0% {
 		-webkit-transform: scaleY(0.4);
@@ -207,6 +216,7 @@ select:-webkit-autofill {
 	animation: tracking-in-expand 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 
+/* Key Frames : Tracking in expand */
 @-webkit-keyframes tracking-in-expand {
 	0% {
 		letter-spacing: -0.5em;
@@ -237,13 +247,14 @@ select:-webkit-autofill {
 	}
 }
 
+
 /* Focus in expand */
 .focus-in-expand {
 	-webkit-animation: focus-in-expand 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	animation: focus-in-expand 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
-
+/* Key Frames : Focus in expand */
 @-webkit-keyframes focus-in-expand {
 	0% {
 		letter-spacing: -0.5em;
@@ -274,12 +285,13 @@ select:-webkit-autofill {
 	}
 }
 
+
 /* Focus in contract */
 .focus-in-contract {
 	-webkit-animation: focus-in-contract 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	animation: focus-in-contract 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
-
+/* Key Frames : Focus in contract */
 @-webkit-keyframes focus-in-contract {
 	0% {
 		letter-spacing: 1em;
@@ -294,7 +306,6 @@ select:-webkit-autofill {
 		opacity: 1;
 	}
 }
-
 @keyframes focus-in-contract {
 	0% {
 		letter-spacing: 1em;
@@ -317,7 +328,7 @@ select:-webkit-autofill {
 	animation: focus-in-expand-fwd 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
-
+/* Key Frames : Focus in expand */
 @-webkit-keyframes focus-in-expand-fwd {
 	0% {
 		letter-spacing: -0.5em;
@@ -336,7 +347,6 @@ select:-webkit-autofill {
 		opacity: 1;
 	}
 }
-
 @keyframes focus-in-expand-fwd {
 	0% {
 		letter-spacing: -0.5em;
@@ -358,13 +368,4 @@ select:-webkit-autofill {
 
 
 
-/* Key Frames */
-@keyframes bp {
-	100% {
-		background-position: 0% 552px;
-	}
 
-	0% {
-		background-position: 0% 0px;
-	}
-}

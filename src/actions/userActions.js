@@ -26,6 +26,8 @@ import {
 	USER_UPDATE_FAIL,
 } from '../constants/userConstants'
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
+import { CART_ADD_ITEM } from '../constants/cartConstants'
+
 
 // Actions to login
 export const login = (email, password) => async (dispatch) => {
@@ -51,6 +53,37 @@ export const login = (email, password) => async (dispatch) => {
 		})
 		// Set user to local storage
 		localStorage.setItem('userInfo', JSON.stringify(data))
+	
+		// Prepare request to get cart items with token
+		const config2 = {
+			headers: {
+				Authorization: `Bearer ${data.token}`,
+			},
+		};
+		// Get cart items from server
+		const cartData  = await axios.get(`/api/cart`,config2);
+		// Store cart items in local storage
+		const localCartData = []
+		cartData.data.cartItems.map((item) => {
+			const temp = {
+				countInStock: item.product.countInStock,
+				image: item.product.image,
+				name: item.product.name,
+				price: item.product.price,
+				product: item.product._id,
+				qty: item.qty,
+			}
+			localCartData.push(temp)
+		})
+		console.log(localCartData)
+		localStorage.setItem('cartItems', JSON.stringify(localCartData))
+		localCartData.map((item) => {
+			dispatch({
+				type: CART_ADD_ITEM,
+				payload: item,
+			})
+			return null
+		})
 	} catch (error) {
 		dispatch({
 			type: USER_LOGIN_FAIL,

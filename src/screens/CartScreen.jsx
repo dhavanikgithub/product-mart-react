@@ -20,6 +20,7 @@ const CartScreen = ({ history }) => {
 	}
 
 	const removeFromCartHandler = (id) => {
+		console.log(id)
 		dispatch(removeFromCart(id))
 	}
 	const checkoutHandler = () => {

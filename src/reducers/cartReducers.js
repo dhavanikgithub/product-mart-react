@@ -16,7 +16,7 @@ export const cartReducer = (
 			// Get item from the payload
 			const item = action.payload
 
-			// Assign existItem to item.product if their prpduct ids match
+			// Assign existItem to item.product if their product ids match
 			const existItem = state.cartItems.find((x) => x.product === item.product)
 
 			// Check if item exists or Not

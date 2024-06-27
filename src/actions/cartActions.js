@@ -85,3 +85,4 @@ export const clearCart = () => async (dispatch, getState) => {
 	localStorage.setItem('cartItems', '[]')
 	axios.delete(`/api/cart`,config);
 }
+

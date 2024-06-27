@@ -75,11 +75,11 @@ const ContactUsScreen = () => {
 	}
 
 	return (
-		<Container className='py-5'>
+		<Container className='py-5 '>
 			<Row className='justify-content-md-center'>
 				<Col md={6}>
-					<Card className='rounded shadow'>
-						<h5 className='text-center mb-4 text-white bg-dark rounded-top p-2'>Contact Us</h5>
+					<Card className='rounded shadow scale-up-center'>
+						<h5 className='text-center mb-4 text-white bg-dark rounded-top p-4'>Contact Us</h5>
 						<Form onSubmit={handleSubmit} className='p-4'>
 							<Form.Group controlId='name' className='mb-3'>
 								<Form.Label>Name</Form.Label>
